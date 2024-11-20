@@ -33,18 +33,23 @@ try {
 
         if ($user && password_verify($password, $user['password'])) {
             // Successful login
-            echo "Login successful! Welcome, " . htmlspecialchars($user['username']) . ".";
-            header("Location: protected_page.php"); // Redirect to protected page
+            // echo "Login successful! Welcome, " . htmlspecialchars($user['username']) . ".";
+            $_SESSION['user_id'] = $user['id']; // Store user ID in session
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['success'] = "Login successful! Welcome, " . htmlspecialchars($user['username']) . ".";
+            header("Location: protected_page.php");
             exit();
         } else {
             // Invalid credentials
-            echo "Invalid username or password.";
+            // echo "Invalid username or password.";
+            $_SESSION['error'] = "Invalid username or password.";
             header("Location: login.php");
             exit();
         }
     }
 } catch (PDOException $e) {
-    echo "Database error: " . $e->getMessage();
+    // echo "Database error: " . $e->getMessage();
+    $_SESSION['error'] = "Database error: " . $e->getMessage();
     header("Location: login.php");
     exit();
 }
