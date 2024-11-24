@@ -25,6 +25,23 @@ try {
             die("All fields are required.");
         }
 
+        // Email validation
+        if (!preg_match("/^[a-zA-Z]+@uob\.edu\.bh$/", $email)) {
+            $_SESSION['error'] = "Please use a valid UOB email address (example: wahmed@uob.edu.bh)";
+            header("Location: register.php");
+            exit();
+        }
+
+        // Check if email exists
+        $stmt = $pdo->prepare("SELECT email FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $_SESSION['error'] = "Email already registered.";
+            header("Location: register.php");
+            exit();
+        }
+        
         // Hash the password for secure storage
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
