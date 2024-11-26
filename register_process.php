@@ -16,12 +16,14 @@ try {
     // Check if form data is submitted
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Retrieve and sanitize form data
+        $fName = htmlspecialchars(trim($_POST['fName']));
+        $lName = htmlspecialchars(trim($_POST['lName']));
         $username = htmlspecialchars(trim($_POST['username']));
         $email = htmlspecialchars(trim($_POST['email']));
         $password = $_POST['password'];
 
         // Validate that none of the fields are empty
-        if (empty($username) || empty($email) || empty($password)) {
+        if (empty($fName) || empty($lName) || empty($username) || empty($email) || empty($password)) {
             die("All fields are required.");
         }
 
@@ -46,10 +48,12 @@ try {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
         // Insert data into the users table
-        $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
+        $sql = "INSERT INTO users (fName, lName, username, email, password) VALUES (:fName, :lName, :username, :email, :password)";
         $stmt = $pdo->prepare($sql);
         
         // Bind parameters
+        $stmt->bindParam(':fName', $fName);
+        $stmt->bindParam(':lName', $lName);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $hashedPassword);
