@@ -97,3 +97,58 @@
   a:hover {
     text-decoration: underline;
   }  
+
+  /* Desktop View */
+@media (min-width: 1024px) {
+    .form-container {
+        max-width: 600px; /* Larger forms for desktops */
+    }
+    h2 {
+        font-size: 28px;
+    }
+}
+
+/* Tablet View */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .form-container {
+        max-width: 500px; /* Slightly smaller form */
+        padding: 30px; /* Adjust padding for smaller devices */
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        padding: 10px; /* Slightly smaller padding on tablet */
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+
+/* Mobile View */
+@media (max-width: 767px) {
+    .form-container {
+        max-width: 100%; /* Full-width on mobile */
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 22px; /* Smaller font for mobile */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        font-size: 14px; /* Smaller input fields */
+        padding: 10px;  /* Adjust input padding */
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
