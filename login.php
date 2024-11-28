@@ -12,10 +12,10 @@
         <h2>Login</h2>
         <hr>
         <form action="login_process.php" method="POST">
-            <label for="username">Username:</label>
+            <label for="username">Username</label>
             <input type="text" placeholder="Enter Username" name="username" id="username" required><br><br>
 
-            <label for="password">Password:</label>
+            <label for="password">Password</label>
             <input type="password" placeholder="Enter Password" name="password" id="password" required><br><br>
 
             <button type="submit" class="registerbtn">Login</button>
